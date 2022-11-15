@@ -1,5 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
-public class Documento
+public abstract class Documento
 {
     public Documento(string id, string titolo, string settore, int anno, string scaffale, string autore)
     {
@@ -19,9 +19,22 @@ public class Documento
     public bool Disponibile { get; set; }
     public string Scaffale { get; set; }
     public string Autore { get; set; }
+    public abstract void StampaDocumento();
 
-    public static void StampaDocumento(Documento documento)
+    public static void StampaDati(Documento documento)
     {
+        Console.WriteLine();
+        Console.Write("Codice: ");
+        Console.WriteLine(documento.Id);
+        Console.Write("Titolo: ");
+        Console.WriteLine(documento.Titolo);
+        Console.Write("Settore: ");
+        Console.WriteLine(documento.Settore);
+        Console.Write("Anno: ");
+        Console.WriteLine(documento.Anno);
+        Console.Write("Scaffale: ");
+        Console.WriteLine(documento.Scaffale);
+        Console.Write("Autore: ");
         Console.WriteLine(documento.Autore);
     }
 

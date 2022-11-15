@@ -17,6 +17,10 @@ biblioteca.utenti.Add(new Utente("Varramista", "Giulia", "giulia@gmail.it", "382
 
 BibliotecaDB test = new BibliotecaDB();
 
-Documento documento = test.CercaDocumento("183");
+Documento documento1 = test.CercaDocumento("183");
+Documento documento2 = test.CercaDocumento("393");
+Documento documento3 = test.CercaDocumento("726");
 
-Documento.StampaDocumento(documento);
+documento1.StampaDocumento();
+documento2.StampaDocumento();
+documento3.StampaDocumento();

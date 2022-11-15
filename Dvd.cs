@@ -7,6 +7,12 @@ public class Dvd : Documento
     {
         Durata = durata;
     }
-
+    public override void StampaDocumento()
+    {
+        StampaDati(this);
+        Console.Write("Lunghezza: ");
+        Console.WriteLine(this.Durata + " min");
+        Console.WriteLine();
+    }
     public int Durata { get; set; }
 }

@@ -5,6 +5,13 @@ public class Libro : Documento
     {
         Pagine = pagine;
     }
+    public override void StampaDocumento()
+    {
+        StampaDati(this);
+        Console.Write("Pagine: ");
+        Console.WriteLine(this.Pagine);
+        Console.WriteLine();
+    }
 
     public int Pagine { get; set; }
 }

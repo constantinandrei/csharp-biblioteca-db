@@ -5,7 +5,9 @@
 public class BibliotecaDB {
     private string connectionString = "Data Source=localhost;Initial Catalog=biblioteca-db;Integrated Security=True";
     private SqlConnection connection;
-    public BibliotecaDB() {
+   
+    public void OpenConnection()
+    {
         connection = new SqlConnection(connectionString);
         try
         {
@@ -14,7 +16,8 @@ public class BibliotecaDB {
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
-        } 
+        }
+
     }
 
     public void CloseConnection()
@@ -24,6 +27,7 @@ public class BibliotecaDB {
 
     public void AggiungiDocumento(Documento documento)
     {
+        OpenConnection();
         string query = "INSERT INTO Documenti (codice, titolo, anno, settore, disponibile, scaffale, autore, tipo, durata, pagine) " +
             "VALUES (@codice, @titolo, @anno, @settore, @disponibile, @scaffale, @autore, @tipo, @durata, @pagine)";
         SqlCommand cmd = new SqlCommand(query, connection);
@@ -52,10 +56,12 @@ public class BibliotecaDB {
         }
 
         cmd.ExecuteNonQuery();
+        CloseConnection();
     }
         
     public Documento CercaDocumento(string cod)
     {
+        OpenConnection();
         Documento documento = null;
         string query = "SELECT * FROM DOCUMENTI WHERE codice = @codice";
         SqlCommand cmd = new SqlCommand(query, connection);
@@ -88,7 +94,7 @@ public class BibliotecaDB {
                 
 
         }
-
+        CloseConnection();
         return documento;
     }
 }
