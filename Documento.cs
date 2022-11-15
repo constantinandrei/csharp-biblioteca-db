@@ -20,4 +20,9 @@ public class Documento
     public string Scaffale { get; set; }
     public string Autore { get; set; }
 
+    public static void StampaDocumento(Documento documento)
+    {
+        Console.WriteLine(documento.Autore);
+    }
+
 }

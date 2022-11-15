@@ -19,6 +19,8 @@ public class Biblioteca
         return null;
     }
 
+    
+
     public Utente TrovaUtente(string cognome, string nome)
     {
         foreach (Utente utente in utenti)
@@ -119,12 +121,4 @@ public class Biblioteca
         }
     }
 
-    public void AggiungiListaAlDatabase()
-    {
-        BibliotecaDB bibli = new BibliotecaDB();
-        foreach (Documento documento in documenti)
-        {
-            bibli.AggiungiDocumento(documento);
-        }
-    }
 }
