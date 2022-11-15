@@ -22,20 +22,35 @@ public class BibliotecaDB {
         connection.Close();
     }
 
-    public void AggiungiLibro(Libro libro)
+    public void AggiungiDocumento(Documento documento)
     {
         string query = "INSERT INTO Documenti (codice, titolo, anno, settore, disponibile, scaffale, autore, tipo, durata, pagine) " +
-            "VALUES (@codice, @titolo, @anno, @settore, @disponibile, @scaffale, @autore, @tipo, null, @pagine)";
+            "VALUES (@codice, @titolo, @anno, @settore, @disponibile, @scaffale, @autore, @tipo, @durata, @pagine)";
         SqlCommand cmd = new SqlCommand(query, connection);
-        cmd.Parameters.Add(new SqlParameter("@codice", libro.Id));
-        cmd.Parameters.Add(new SqlParameter("@titolo", libro.Titolo));
-        cmd.Parameters.Add(new SqlParameter("@anno", libro.Anno));
-        cmd.Parameters.Add(new SqlParameter("@settore", libro.Settore));
-        cmd.Parameters.Add(new SqlParameter("@disponibile", libro.Disponibile));
-        cmd.Parameters.Add(new SqlParameter("@scaffale", libro.Scaffale));
-        cmd.Parameters.Add(new SqlParameter("@autore", libro.Autore));
-        cmd.Parameters.Add(new SqlParameter("@tipo", 'l'));
-        cmd.Parameters.Add(new SqlParameter("@pagine", libro.Pagine));
+        cmd.Parameters.Add(new SqlParameter("@codice", documento.Id));
+        cmd.Parameters.Add(new SqlParameter("@titolo", documento.Titolo));
+        cmd.Parameters.Add(new SqlParameter("@anno", documento.Anno));
+        cmd.Parameters.Add(new SqlParameter("@settore", documento.Settore));
+        cmd.Parameters.Add(new SqlParameter("@disponibile", documento.Disponibile));
+        cmd.Parameters.Add(new SqlParameter("@scaffale", documento.Scaffale));
+        cmd.Parameters.Add(new SqlParameter("@autore", documento.Autore));
+        
+        if (documento is Libro)
+        {
+            Libro libro = (Libro)documento;
+            cmd.Parameters.Add(new SqlParameter("@tipo", 'l'));
+            cmd.Parameters.Add(new SqlParameter("@durata", DBNull.Value));
+            cmd.Parameters.Add(new SqlParameter("pagine", libro.Pagine));
+        }
+
+        if (documento is Dvd)
+        {
+            Dvd dvd = (Dvd)documento;
+            cmd.Parameters.Add(new SqlParameter("@tipo", 'd'));
+            cmd.Parameters.Add(new SqlParameter("@durata", dvd.Durata));
+            cmd.Parameters.Add(new SqlParameter("pagine", DBNull.Value));
+        }
+
         cmd.ExecuteNonQuery();
     }
 }

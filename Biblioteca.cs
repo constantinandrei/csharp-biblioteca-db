@@ -118,4 +118,13 @@ public class Biblioteca
             Console.WriteLine($"Titolo: {prestito.Documento.Titolo}");
         }
     }
+
+    public void AggiungiListaAlDatabase()
+    {
+        BibliotecaDB bibli = new BibliotecaDB();
+        foreach (Documento documento in documenti)
+        {
+            bibli.AggiungiDocumento(documento);
+        }
+    }
 }
